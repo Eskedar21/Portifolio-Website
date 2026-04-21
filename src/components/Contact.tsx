@@ -24,18 +24,28 @@ export default function Contact() {
         body: JSON.stringify(formData),
       });
 
-      const data = await response.json();
+      const contentType = response.headers.get("content-type");
+      let data;
+      
+      if (contentType && contentType.includes("application/json")) {
+        data = await response.json();
+      } else {
+        // Handle non-JSON response (like a 404 HTML page)
+        const text = await response.text();
+        console.error("Non-JSON response received:", text);
+        throw new Error("The server returned an unexpected response. This usually happens if the backend API is not correctly configured or hosted.");
+      }
 
       if (response.ok) {
         setSuccessMsg(data.message);
         setIsModalOpen(true);
         setFormData({ name: "", email: "", message: "" });
       } else {
-        throw new Error(data.error || "Something went wrong");
+        throw new Error(data.error || "Something went wrong while sending your message.");
       }
     } catch (error) {
       console.error("Form error:", error);
-      alert(error instanceof Error ? error.message : "Failed to send message. Please try again later.");
+      alert(error instanceof Error ? error.message : "Failed to connect to the email service. Please ensure the backend server is running.");
     } finally {
       setIsSubmitting(false);
     }

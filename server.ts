@@ -12,7 +12,8 @@ async function startServer() {
 
   app.use(express.json());
 
-  // API Route for Contact Form
+  // In development, handle the API route through this server
+  // On Vercel, the /api/contact.js serverless function will handle this instead
   app.post("/api/contact", async (req, res) => {
     const { name, email, message } = req.body;
 
