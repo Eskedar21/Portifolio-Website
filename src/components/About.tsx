@@ -3,10 +3,10 @@ import { User, Code, Database, Layout } from "lucide-react";
 
 export default function About() {
   const skills = [
-    { name: "Frontend Development", icon: <Layout size={20} />, description: "React, TypeScript, Tailwind CSS" },
-    { name: "System Analysis", icon: <Database size={20} />, description: "Requirement gathering, System design" },
-    { name: "UI/UX Design", icon: <Code size={20} />, description: "Figma, Responsive layouts" },
-    { name: "Problem Solving", icon: <User size={20} />, description: "Analytical thinking, Debugging" },
+    { name: "System Analysis", icon: <Database size={20} />, description: "Requirement gathering, workflow design, and business logic mapping." },
+    { name: "Frontend Development", icon: <Layout size={20} />, description: "React, Next.js, and TypeScript for scalable, high-performance apps." },
+    { name: "UI/UX Design", icon: <Code size={20} />, description: "Crafting clean, intuitive, and user-friendly digital interfaces." },
+    { name: "Computer Engineering", icon: <User size={20} />, description: "Strong technical foundation in hardware and software systems." },
   ];
 
   return (
@@ -28,15 +28,13 @@ export default function About() {
               Code and Business
             </h2>
             <p className="text-xl text-muted-foreground leading-relaxed mb-8">
-              I am a Frontend Developer and System Analyst with a passion for creating 
-              digital experiences that are not only visually stunning but also 
-              structurally sound and aligned with business objectives.
+              I’m Eskedar Tesfaye, a Frontend Developer and System Analyst with a background in Computer Engineering.
+            </p>
+            <p className="text-lg text-muted-foreground/80 leading-relaxed mb-6">
+              I specialize in transforming business requirements into functional, user-friendly systems. With hands-on experience in system analysis, I understand how to gather requirements, design workflows, and build solutions that align with real organizational needs.
             </p>
             <p className="text-lg text-muted-foreground/80 leading-relaxed">
-              With a background in both technical implementation and high-level 
-              system analysis, I bring a unique perspective to every project, 
-              ensuring that the final product meets both user needs and technical 
-              requirements.
+              I have developed real-world platforms, including vehicle inspection systems and e-government evaluation tools, focusing on clean UI, efficient data handling, and practical usability. Using modern technologies like React and Next.js, I build scalable applications with a strong focus on performance, structure, and user experience.
             </p>
           </motion.div>
 

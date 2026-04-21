@@ -1,10 +1,8 @@
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import About from "./components/About";
-import Projects from "./components/Projects";
-import Services from "./components/Services";
-import WhyMe from "./components/WhyMe";
-import Contact from "./components/Contact";
+import Home from "./pages/Home";
+import ProjectsPage from "./pages/ProjectsPage";
+import ProjectDetail from "./pages/ProjectDetail";
 import Footer from "./components/Footer";
 import { useState, useEffect } from "react";
 
@@ -24,17 +22,18 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground font-sans selection:bg-blue-500 selection:text-white transition-colors duration-300">
-      <Navbar isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
-      <main>
-        <Hero />
-        <About />
-        <Projects />
-        <Services />
-        <WhyMe />
-        <Contact />
-      </main>
-      <Footer />
-    </div>
+    <Router>
+      <div className="min-h-screen bg-background text-foreground font-sans selection:bg-blue-500 selection:text-white transition-colors duration-300">
+        <Navbar isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
+        <main>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/projects" element={<ProjectsPage />} />
+            <Route path="/project/:id" element={<ProjectDetail />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
+    </Router>
   );
 }

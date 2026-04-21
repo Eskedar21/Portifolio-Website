@@ -25,9 +25,8 @@ export default function Hero() {
               into Powerful Digital Systems
             </span>
           </h1>
-          <p className="max-w-2xl mx-auto text-lg md:text-xl text-muted-foreground mb-10 leading-relaxed">
-            Specializing in React, Next.js, and high-quality solutions. 
-            Translating complex requirements into functional, user-friendly systems.
+          <p className="max-w-3xl mx-auto text-lg md:text-xl text-muted-foreground mb-10 leading-relaxed">
+            Frontend Developer & System Analyst specializing in dashboards, admin panels, and business tools using React and Next.js to deliver scalable, high-quality solutions.
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -42,7 +41,7 @@ export default function Hero() {
               href="#contact"
               className="px-8 py-4 bg-muted text-foreground font-semibold rounded-full border border-border hover:bg-accent transition-all"
             >
-              Contact Me
+              Let’s Build Your System
             </a>
           </div>
         </motion.div>

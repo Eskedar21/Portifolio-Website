@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
-import { Mail, Phone, Send, MapPin } from "lucide-react";
+import { Mail, Phone, Send, Loader2 } from "lucide-react";
 import React, { useState } from "react";
+import SuccessModal from "./SuccessModal";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -8,17 +9,46 @@ export default function Contact() {
     email: "",
     message: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [successMsg, setSuccessMsg] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real app, you'd send this to a backend
-    console.log("Form submitted:", formData);
-    alert("Thank you for your message! I'll get back to you soon.");
-    setFormData({ name: "", email: "", message: "" });
+    setIsSubmitting(true);
+    
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSuccessMsg(data.message);
+        setIsModalOpen(true);
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        throw new Error(data.error || "Something went wrong");
+      }
+    } catch (error) {
+      console.error("Form error:", error);
+      alert(error instanceof Error ? error.message : "Failed to send message. Please try again later.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <section id="contact" className="py-24 bg-background border-t border-border transition-colors duration-300">
+      <SuccessModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+        message={successMsg}
+      />
+      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <motion.div
@@ -110,10 +140,20 @@ export default function Contact() {
               </div>
               <button
                 type="submit"
-                className="w-full py-5 bg-foreground text-background font-bold rounded-2xl hover:opacity-90 transition-all flex items-center justify-center gap-2 group"
+                disabled={isSubmitting}
+                className="w-full py-5 bg-foreground text-background font-bold rounded-2xl hover:opacity-90 disabled:opacity-70 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2 group"
               >
-                Send Message
-                <Send size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                {isSubmitting ? (
+                  <>
+                    Sending...
+                    <Loader2 size={18} className="animate-spin" />
+                  </>
+                ) : (
+                  <>
+                    Send Message
+                    <Send size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                  </>
+                )}
               </button>
             </form>
           </motion.div>
