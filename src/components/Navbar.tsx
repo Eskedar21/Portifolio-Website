@@ -56,34 +56,32 @@ export default function Navbar({ isDarkMode, toggleTheme }: NavbarProps) {
           </div>
           
           <div className="hidden md:flex items-center space-x-8">
-            {!isProjectDetail && (
-              <div className="flex items-baseline space-x-8">
-                {navLinks.map((link) => (
-                  link.type === "route" ? (
-                    <Link
-                      key={link.name}
-                      to={link.href}
-                      className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                        location.pathname === link.href 
-                          ? "text-blue-600 dark:text-blue-400" 
-                          : "text-muted-foreground hover:text-foreground"
-                      }`}
-                    >
-                      {link.name}
-                    </Link>
-                  ) : (
-                    <a
-                      key={link.name}
-                      href={link.href}
-                      onClick={(e) => handleAnchorClick(e, link.href)}
-                      className="text-muted-foreground hover:text-foreground px-3 py-2 rounded-md text-sm font-medium transition-colors"
-                    >
-                      {link.name}
-                    </a>
-                  )
-                ))}
-              </div>
-            )}
+            <div className="flex items-baseline space-x-8">
+              {navLinks.map((link) => (
+                link.type === "route" ? (
+                  <Link
+                    key={link.name}
+                    to={link.href}
+                    className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                      location.pathname === link.href 
+                        ? "text-blue-600 dark:text-blue-400" 
+                        : "text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                ) : (
+                  <Link
+                    key={link.name}
+                    to={link.href}
+                    onClick={(e) => handleAnchorClick(e, link.href)}
+                    className="text-muted-foreground hover:text-foreground px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                  >
+                    {link.name}
+                  </Link>
+                )
+              ))}
+            </div>
             
             <button
               onClick={toggleTheme}
@@ -102,14 +100,12 @@ export default function Navbar({ isDarkMode, toggleTheme }: NavbarProps) {
             >
               {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
             </button>
-            {!isProjectDetail && (
-              <button
-                onClick={() => setIsOpen(!isOpen)}
-                className="inline-flex items-center justify-center p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted focus:outline-none"
-              >
-                {isOpen ? <X size={24} /> : <Menu size={24} />}
-              </button>
-            )}
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="inline-flex items-center justify-center p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted focus:outline-none"
+            >
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
           </div>
         </div>
       </div>
@@ -137,9 +133,9 @@ export default function Navbar({ isDarkMode, toggleTheme }: NavbarProps) {
                   {link.name}
                 </Link>
               ) : (
-                <a
+                <Link
                   key={link.name}
-                  href={link.href}
+                  to={link.href}
                   onClick={(e) => {
                     setIsOpen(false);
                     handleAnchorClick(e, link.href);
@@ -147,7 +143,7 @@ export default function Navbar({ isDarkMode, toggleTheme }: NavbarProps) {
                   className="text-muted-foreground hover:text-foreground block px-3 py-2 rounded-md text-base font-medium"
                 >
                   {link.name}
-                </a>
+                </Link>
               )
             ))}
           </div>

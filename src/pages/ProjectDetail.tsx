@@ -55,10 +55,6 @@ export default function ProjectDetail() {
           </h1>
           
           <div className="flex flex-wrap gap-4 items-center">
-             <div className="flex items-center gap-2 text-muted-foreground bg-muted/30 px-4 py-2 rounded-xl border border-border">
-                <Calendar size={16} />
-                <span className="text-sm">Completed in 2024</span>
-             </div>
              <a 
                 href={project.links.demo}
                 target="_blank"
@@ -129,7 +125,7 @@ export default function ProjectDetail() {
 
             <div className="pt-8 flex justify-between items-center border-t border-border mt-16">
               <Link 
-                to="/"
+                to="/#projects"
                 className="flex items-center gap-2 px-6 py-3 border border-border rounded-xl hover:bg-muted transition-colors font-bold"
               >
                 <ArrowLeft size={18} /> Back to Projects
